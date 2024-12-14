@@ -12,15 +12,15 @@ const poppins = Poppins({
 export const metadata = {
   title: "Suraj Pandey",
   description:
-    "An extensive display of my full-stack development skills, experiences, and projects, demonstrating my proficiency and commitment to coding.",
+    "Expert in React.js, Next.js, and blockchain integration, creating seamless user interfaces and innovative Web3 solutions...",
   icons: {
     icon: [
       {
-        url: "/logo-light.png",
+        url: "/favicon.ico",
         media: "(prefers-color-scheme: light)",
       },
       {
-        url: "/logo.png",
+        url: "/favicon.ico",
         media: "(prefers-color-scheme: dark)",
       },
     ],

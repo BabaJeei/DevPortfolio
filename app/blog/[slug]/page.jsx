@@ -24,6 +24,33 @@ export const generateMetadata = async ({ params }) => {
   return {
     title: post?.title,
     description: post?.desc,
+    openGraph: {
+      title: post?.title,
+      description: post?.desc,
+      images: post?.img,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post?.title,
+      description: post?.desc,
+      images: post?.img,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      nocache: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+    verification: {
+      google: "google-site-verification=GOOGLE_SITE_VERIFICATION",
+    },
   };
 };
 
