@@ -17,36 +17,68 @@ const ThreeHome = () => {
   // const audioRef = useRef(new Audio(sakura));
   // audioRef.current.volume = 0.4;
   // audioRef.current.loop = true;
-  const audioRef = useRef(null);
-
-  useEffect(() => {
-    const audio = new Audio("/sakura.mp3");
-    audio.volume = 0.4;
-    audio.loop = true;
-    // audioRef.current = audio;
-
-    // Optional: Auto-play audio (requires user interaction in some browsers)
-    audio.play().catch((err) => {
-      console.error("Playback failed:", err);
-    });
-
-    return () => {
-      audio.pause(); // Clean up when the component unmounts
-    };
-  }, []);
   const [isRotating, setIsRotating] = useState(false);
   const [currentStage, setCurrentStage] = useState(1);
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
+  const audioRef = useRef(null);
 
   useEffect(() => {
-    if (isPlayingMusic) {
-      audioRef.current.play();
-    }
+    const audio = new Audio(sakura);
+    audio.volume = 0.4;
+    audio.loop = true;
+    audioRef.current = audio;
 
     return () => {
-      audioRef.current.pause();
+      audio.pause(); // Stop audio when component unmounts
+      audio.currentTime = 0; // Reset to start
     };
+  }, []);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      if (isPlayingMusic) {
+        audioRef.current
+          .play()
+          .catch((err) => console.error("Playback failed:", err));
+      } else {
+        audioRef.current.pause();
+      }
+    }
   }, [isPlayingMusic]);
+
+  const toggleMusic = () => {
+    setIsPlayingMusic((prev) => !prev);
+  };
+
+  // const [isPlayingMusic, setIsPlayingMusic] = useState(false);
+  // const audioRef = useRef(null);
+
+  // useEffect(() => {
+  //   const audio = new Audio(sakura);
+  //   audio.volume = 0.4;
+  //   audio.loop = true;
+  //   // audioRef.current = audio;
+
+  //   // Optional: Auto-play audio (requires user interaction in some browsers)
+  //   audio.play().catch((err) => {
+  //     console.error("Playback failed:", err);
+  //   });
+
+  //   return () => {
+  //     // audioRef.current.pause();
+  //     // audio.pause(); // Clean up when the component unmounts
+  //   };
+  // }, []);
+
+  // useEffect(() => {
+  //   if (isPlayingMusic) {
+  //     // audioRef.current.play();
+  //   }
+
+  //   return () => {
+  //     // audioRef.current.pause();
+  //   };
+  // }, [isPlayingMusic]);
 
   const adjustPlaneForScreenSize = () => {
     let screenScale, screenPosition;
